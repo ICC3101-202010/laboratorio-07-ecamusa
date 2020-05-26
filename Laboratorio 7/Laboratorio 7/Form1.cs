@@ -134,10 +134,19 @@ namespace Laboratorio_7
         private void operator_click(object sender, EventArgs e)
         {
             Button button = (Button)sender;
-            operation = button.Text;
-            result1 = Double.Parse(textresult.Text);
-            op = true;
-            label1.Text = result1.ToString() + " " + operation;
+            if(textresult.Text.Contains("Math Error"))
+            {
+                textresult.Text = "0";
+            }
+            else
+            {
+                operation = button.Text;
+                result1 = Double.Parse(textresult.Text);
+                op = true;
+                label1.Text = result1.ToString() + " " + operation;
+
+            }
+           
         }
 
         private void buttonAC_Click(object sender, EventArgs e)
@@ -157,6 +166,14 @@ namespace Laboratorio_7
 
         private void buttonequal_Click(object sender, EventArgs e)
         {
+            if(textresult.Text=="Math Error")
+            {
+                textresult.Text = "0";
+            }
+            if(textresult.Text.Contains("Math Error"))
+            {
+                textresult.Text = "0";
+            }
             switch (operation) 
             {
                 case "+":
@@ -187,13 +204,26 @@ namespace Laboratorio_7
                         }
                         else
                         {
-                            textresult.Text = (result1 / Double.Parse(textresult.Text)).ToString();
-                            z = textresult.Text;
-                            lista.Add(z);
+                            if (textresult.Text.Contains("Math Error"))
+                            {
+                                textresult.Text = "0";
+                                break;
+                            }
+                            else
+                            {
+                                textresult.Text = (result1 / Double.Parse(textresult.Text)).ToString();
+                                z = textresult.Text;
+                                lista.Add(z);
+                            }
                         }
                        
                     }
                     break;
+                case "Math Error":
+                    break;
+                default:
+                    break;
+
 
             }
 
